@@ -10,7 +10,8 @@
     "setup": "node scripts/setup.js",
     "db:migrate": "npx prisma migrate deploy",
     "db:push": "npx prisma db push",
-    "db:generate": "npx prisma generate"
+    "db:generate": "npx prisma generate",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
