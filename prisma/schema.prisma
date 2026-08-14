@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password_hash String
+  createdAt     DateTime  @default(now())
+  sendLogs      SendLog[]
+}
+
+model SendLog {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  mailgunAccountId String
+  recipient        String
+  subject          String
+  filename         String?
+  status           String
+  mailgunMessageId String?
+  errorMessage     String?
+  createdAt        DateTime @default(now())
+}
